@@ -1,0 +1,1 @@
+Here I am creating a recipe application using python. I am using django to help create the front end of the application. Django is also what is helping to create the interface for the database as I am developing the simple application. 
