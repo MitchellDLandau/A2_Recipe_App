@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homepage</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main-styles.css' %}">
+</head>
+<body>
+    <div class="image-container">
+        <img src="{% static 'recipes/images/background-spices.jpg' %}" alt="home">
+        <div class="overlay">
+            <div class="writing">
+                <h1>Welcome to Landau Recipes</h1>
+                <button>
+                    <a href="/list/">View Recipes</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

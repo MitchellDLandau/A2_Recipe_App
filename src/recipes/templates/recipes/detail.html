@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe's Detail</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/detail-styles.css' %}">
+</head>
+<body>
+    <div class="image-container">
+        <img class="background" src="{% static 'recipes/images/list-image.jpg' %}" alt="home">
+    </div>
+    <div class="recipe-modal">
+        <h2>{{object.name}}</h2>
+
+        <b>Cooking Time: </b> {{object.cooking_time}} <br>
+
+        <b>Difficulty: </b> {{object.difficulty}} <br>
+
+        <b>Ingredients: </b> {{object.ingredients}} <br>
+
+        <img class="recipe-image" src="{{object.pic.url}}"/>
+
+        <button>
+            <a href="/list">Back</a>
+        </button>
+    </div>
+
+</body>
+</html>

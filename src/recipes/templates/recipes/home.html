@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homepage</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home-styles.css' %}">
+</head>
+<body>
+    <div class="image-container">
+        <img src="{% static 'recipes/images/list-image.jpg' %}" alt="home">
+    </div>
+    <h1>Recipe's List</h1>     
+    <ul class="recipe-list">   
+    {% for object in object_list %}
+    <li class="recipe">
+        <a href ="{{object.get_absolute_url}}"> 
+            {{object.name}}
+        </a>
+        <div class="recipe-image-container">
+            <img src="{{object.pic.url}}" width="150" height="200" />
+        </div>  
+    </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
