@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login-styles.css' %}">
+</head>
+<body>
+   <img class="image-container" src="{% static 'recipes/images/background-spices.jpg' %}" alt="home">
+   <div class="writing">
+      <h1>Login</h1>
+
+      {% if error_message %}
+         {{error_message}}
+      {% endif %}
+
+      <form action="" method="POST" >
+         {% csrf_token %}
+         {{form}}           
+         <br>
+         <button type="submit" >Login</button>
+      </form>
+   </div>
+</body>
+</html>
