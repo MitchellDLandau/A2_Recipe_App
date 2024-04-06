@@ -1,14 +1,23 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Recipe's Detail</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/detail-styles.css' %}">
 </head>
+<div class="image-container">
+    <img class="background" src="{% static 'recipes/images/list-image.jpg' %}" alt="home">
+</div>
+<div class="title-container">
+    <h1>Recipe's List</h1>
+    <button class="logout-button">
+        <a href="{% url 'logout' %}">Logout</a>
+    </button>
+</div>
+</nav>
+
 <body>
-    <div class="image-container">
-        <img class="background" src="{% static 'recipes/images/list-image.jpg' %}" alt="home">
-    </div>
     <div class="recipe-modal">
         <h2>{{object.name}}</h2>
 
@@ -18,15 +27,14 @@
 
         <b>Ingredients: </b> {{object.ingredients}} <br>
 
-        <img class="recipe-image" src="{{object.pic.url}}"/>
+        <img class="recipe-image" src="{{object.pic.url}}" />
 
         <button>
             <a href="/list">Back</a>
         </button>
-        <button class="logout">
-            <a href="{% url 'logout' %}">Logout</a>
-        </button>
+
     </div>
 
 </body>
+
 </html>

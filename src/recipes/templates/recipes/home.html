@@ -1,31 +1,80 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Homepage</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/home-styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home-styles2.css' %}">
 </head>
-<body>
+<nav>
     <div class="image-container">
         <img src="{% static 'recipes/images/list-image.jpg' %}" alt="home">
     </div>
     <div class="title-container">
-        <h1>Recipe's List</h1> 
+        <h1>Recipe's List</h1>
         <button class="logout-button">
             <a href="{% url 'logout' %}">Logout</a>
         </button>
-    </div>   
-    <ul class="recipe-list">   
-    {% for object in object_list %}
-    <li class="recipe">
-        <a class="recipe-name" href ="{{object.get_absolute_url}}"> 
-            {{object.name}}
-        </a>
-        <div class="recipe-image-container">
-            <img src="{{object.pic.url}}" width="150" height="200" />
-        </div>  
-    </li>
-    {% endfor %}
-    </ul>
+    </div>
+</nav>
+
+<body>
+    <div class="container">
+        <div class="form">
+            <form action="" method="GET">
+                <h2>Search Recipes</h2>
+                {% csrf_token %}
+                <div>
+                    <label for="id_recipe_name">Recipe Name:</label>
+                    {{ form.recipe_name }}
+                    {% if form.recipe_name.errors %}
+                    {% for error in form.recipe_name.errors %}
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <div>
+                    <label for="id_ingredients">Ingredients:</label>
+                    {{ form.ingredients }}
+                    {% if form.ingredients.errors %}
+                    {% for error in form.ingredients.errors %}
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <div>
+                    <label for="id_chart_type">Chart Type:</label>
+                    {{ form.chart_type }}
+                    {% if form.chart_type.errors %}
+                    {% for error in form.chart_type.errors %}
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <button type="submit">Search</button>
+                <button type="reset">
+                    <a href="/list">Show all</a>
+                </button>
+                <div class="chart">
+                    {% if chart_image %}
+                    <img src="data:image/png;base64,{{ chart_image }}" alt="Chart">
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+
+        <div class="recipes">
+            <ul class="recipe-list">
+                {% for object in object_list %}
+                <li class="recipe">
+                    <a class="recipe-name" href="{{object.get_absolute_url}}">
+                        {{object.name}}
+                    </a>
+                    <div class="recipe-image-container">
+                        <img src="{{object.pic.url}}" width="150" height="200" />
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </body>
+
 </html>

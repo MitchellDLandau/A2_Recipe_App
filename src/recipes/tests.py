@@ -1,4 +1,5 @@
 from django.test import TestCase
+from recipes.forms import RecipeSearchForm
 
 # Create your tests here.
 
@@ -7,7 +8,6 @@ from .models import Recipe
 class RecipeModelTest(TestCase):
 
     def setUpTestData():
-        # Set up non-modified objects used by all test methods
         Recipe.objects.create(name='Pizza',
                               cooking_time=30,
                               difficulty='easy',
@@ -52,3 +52,20 @@ class RecipeModelTest(TestCase):
         recipe = Recipe.objects.get(id=1)
         expected_object_name = f'{recipe.name}'
         self.assertEquals(expected_object_name, str(recipe))
+
+class RecipeFormTest(TestCase):
+#test if form is has data filled out if the pages template is still valid.
+    def recipe_searched(self):
+        form = RecipeSearchForm(data={'recipe_name': 'Pizza', 'ingredients': 'Cheese, Sauce, Dough'})
+        self.assertTrue(form.is_valid())
+
+#test if form is not filled out if the pages template is still valid. 
+    def recipe_no_search(self):
+        form = RecipeSearchForm(data={})
+        self.assertTrue(form.is_valid())
+#test if form is invalid if the pages template is still valid.
+    def test_recipe_search_form_invalid_data(self):
+        form_data = {'recipe_name': 'Pasta Carbonara', 'ingredients': 'pasta, eggs, bacon', 'chart_type': 'invalid'}
+        form = RecipeSearchForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
