@@ -1,13 +1,15 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.contrib import messages
+from django.urls import reverse
 import pandas as pd
 from .utils import get_recipe_from_id, get_chart
 from .models import Recipe
-from .forms import RecipeSearchForm
+from .forms import RecipeSearchForm, RecipeAddForm
+import json
 
 def main(request):
     return render(request, 'recipes/main.html')
@@ -53,11 +55,9 @@ class RecipeListView(LoginRequiredMixin, ListView):
                 "ingredients": ingredients,
             }
 
-
             if chart_type == "#1":
                 chart_data["name"] = chart_data.get("name")
             elif chart_type == '#2':
-
                size = data['ingredients']
                labels = data['name']
             else:
@@ -66,10 +66,32 @@ class RecipeListView(LoginRequiredMixin, ListView):
             context["chart_image"] = chart_image
 
         return context
+    
+class AddRecipeView(LoginRequiredMixin, CreateView):
+   model = Recipe
+   template_name = 'recipes/add.html'
+   fields = ['name', 'cooking_time', 'difficulty', 'ingredients', 'pic']
 
-
+class ContactView(LoginRequiredMixin, ListView):
+    template_name = 'recipes/contact.html'
+    model = Recipe
+    context_object_name = 'contact'
 
 class RecipeDetailView(LoginRequiredMixin, DetailView):
    model = Recipe
    template_name = 'recipes/detail.html'
    context_object_name = 'recipe'
+
+def add_recipe(request):
+   if request.method == 'POST':
+      form = RecipeAddForm(data=request.POST, files=request.FILES)
+      if form.is_valid():
+         form.save()
+         return redirect(reverse('recipes:list'))
+   else:
+      form = RecipeAddForm()
+
+   previous_url = request.META.get('HTTP_REFERER')
+
+   context = {'form': form, 'previous_url': previous_url}
+   return render(request, 'recipes/add.html', context)

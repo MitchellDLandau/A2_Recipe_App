@@ -4,17 +4,29 @@
 
 <head>
     <title>Homepage</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/home-styles2.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home-styles.css' %}">
 </head>
 <nav>
     <div class="image-container">
         <img src="{% static 'recipes/images/list-image.jpg' %}" alt="home">
     </div>
     <div class="title-container">
+        <div class="nav-buttons">
+            <button class="show-search">Search</button>
+            <button class="hide-search">Hide Search</button>
+            <button class="show-add">
+                <a href="{% url 'add' %}">Add Recipe</a>
+            </button>
+        </div>
         <h1>Recipe's List</h1>
-        <button class="logout-button">
-            <a href="{% url 'logout' %}">Logout</a>
-        </button>
+        <div class="nav-buttons-right">
+            <button class="logout-button">
+                <a href="{% url 'logout' %}">Logout</a>
+            </button>
+            <button>
+                <a href="{% url 'contact' %}">Contact</a>
+            </button>
+        </div>
     </div>
 </nav>
 
@@ -48,7 +60,7 @@
                     {% endfor %}
                     {% endif %}
                 </div>
-                <button type="submit">Search</button>
+                <button class="submit" type="submit">Search</button>
                 <button type="reset">
                     <a href="/list">Show all</a>
                 </button>
@@ -59,7 +71,6 @@
                 </div>
             </form>
         </div>
-
         <div class="recipes">
             <ul class="recipe-list">
                 {% for object in object_list %}
@@ -76,5 +87,6 @@
         </div>
     </div>
 </body>
+<script src="{% static 'recipes/home.js' %}" defer></script>
 
 </html>

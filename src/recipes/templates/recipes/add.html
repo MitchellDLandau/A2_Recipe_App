@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Recipe</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/add.css' %}">
+</head>
+
+<body>
+    <nav>
+        <div class="image-container">
+            <img src="{% static 'recipes/images/list-image.jpg' %}" alt="home">
+        </div>
+        <div class="title-container">
+            <div class="nav-buttons">
+            </div>
+            <h1>Recipe's List</h1>
+        </div>
+        <a href="{{ previous_url }}">
+            <button class="cancel">Cancel</button>
+        </a>
+    </nav>
+    <div class="add-recipe form">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-item">
+                <label for="name">Recipe name: </label>
+                {{ form.name }}
+            </div>
+            <div class="form-item">
+                <label for="ingredients">Ingredients (seperated by a coma): </label>
+                {{ form.ingredients }}
+            </div>
+            <div class="form-item">
+                <label for="cooking_time">Cooking Time: </label>
+                {{ form.cooking_time }}
+            </div>
+            <div class="form-item">
+                <label for="difficulty">Difficulty: </label>
+                {{ form.difficulty }}
+            </div>
+            <div class="form-item">
+                <label for="pic">Picture: </label>
+                {{ form.pic }}
+            </div>
+            <button type="submit" class="confirm-add-recipe">Add Recipe</button>
+        </form>
+    </div>
+</body>
+
+</html>

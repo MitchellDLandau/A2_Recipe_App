@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Contact</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}">
+</head>
+<div class="image-container">
+    <img src="{% static 'recipes/images/list-image.jpg' %}" alt="home">
+</div>
+
+<body>
+    <h1>Mitchell Landau</h1>
+
+    <h2>Full Stack Developer</h2>
+
+    <h3 class="description">This website was created to practice Django and learn how to impliment Python into larger
+        projects. I am
+        currently
+        looking for a job in the tech industry. If you are interested in hiring me, please see my contact information
+        below.
+    </h3>
+
+    <div class="contact-links-div">
+        <ul>
+            <li>
+                <a class="contact-links" href="https://www.facebook.com/mitchell.landau.9/" target="_blank"
+                    rel="noreferrer"><img class="contact-image" src="{% static 'recipes/images/facebook.svg' %}"
+                        alt="Facebook">Facebook</a>
+            </li>
+            <li>
+                <a class="contact-links" href="https://www.linkedin.com/in/mitchell-landau-bb3709188/" target="_blank"
+                    rel="noreferrer"><img class="contact-image" src="{% static 'recipes/images/linkedin.svg' %}"
+                        alt="Linked In">Linkedin</a>
+            </li>
+            <li>
+                <a class="contact-links" href="https://github.com/MitchellDLandau" target="_blank" rel="noreferrer"><img
+                        class="contact-image" src="{% static 'recipes/images/github.svg' %}" alt="Github">GitHub</a>
+            </li>
+            <li>
+                <a class="contact-links" href="mailto:mitchelldlandau@gmail.com?subject=Portfolio%20Inquiry"><img
+                        class="contact-image" src="{% static 'recipes/images/email.png' %}" alt="Email">Email Me</a>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
